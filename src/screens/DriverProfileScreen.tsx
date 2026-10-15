@@ -10,6 +10,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { usePlatform } from '../platform/PlatformContext';
 import storage from '../utils/storage';
+import ReportIncidentModal from '../components/ReportIncidentModal';
 
 const DriverProfileScreen = () => {
     const theme = useTheme();
@@ -17,6 +18,7 @@ const DriverProfileScreen = () => {
     const { t } = useLanguage();
     const { driver, logout, switchOrganization, organizations } = useAuth();
     const { configured, tokenRefused } = usePlatform();
+    const [incidentOpen, setIncidentOpen] = useState(false);
 
     const handlePressMenuItem = useCallback(
         (item) => {
@@ -68,6 +70,12 @@ const DriverProfileScreen = () => {
                 ),
             },
             {
+                id: '4',
+                title: 'Report an incident',
+                handler: () => setIncidentOpen(true),
+                hidden: !configured,
+            },
+            {
                 id: '2',
                 title: 'Organization',
                 handler: () => handleSelectOrganization(),
@@ -80,7 +88,7 @@ const DriverProfileScreen = () => {
         ];
 
         return items.filter((item) => !item.hidden);
-    }, [driver, configured, tokenRefused]);
+    }, [driver, configured, tokenRefused, handleSelectOrganization]);
 
     const renderMenuItem = ({ item }) => (
         <Pressable
@@ -143,6 +151,7 @@ const DriverProfileScreen = () => {
                     />
                 </YStack>
             </YStack>
+            <ReportIncidentModal visible={incidentOpen} onClose={() => setIncidentOpen(false)} />
         </SafeAreaView>
     );
 };

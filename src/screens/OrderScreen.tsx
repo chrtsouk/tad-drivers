@@ -21,6 +21,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useOrderManager } from '../contexts/OrderManagerContext';
 import { usePlatform } from '../platform/PlatformContext';
 import PlatformDeliveryActions from '../components/PlatformDeliveryActions';
+import PlatformOrderInfo from '../components/PlatformOrderInfo';
 import { useTempStore } from '../contexts/TempStoreContext';
 import useSocketClusterClient from '../hooks/use-socket-cluster-client';
 import useStorage from '../hooks/use-storage';
@@ -586,6 +587,7 @@ const OrderScreen = ({ route }) => {
                         )}
                     </XStack>
                     <PlatformDeliveryActions order={order} />
+                    <PlatformOrderInfo order={order} />
                     {!isIncomingAdhoc && (
                         <YStack>
                             <CurrentDestinationSelect

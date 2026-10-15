@@ -30,6 +30,8 @@ export interface RunOrder {
     items?: Array<{ name: string; qty: number }>;
     picked_at: string | null;
     fleetbase_order_id?: string | null;
+    /** Custom order fields the shop marked "show to driver" (gate code, spice level, ...). */
+    custom?: Array<{ label: string; value: string }>;
 }
 
 export interface RunBatch {
@@ -58,4 +60,19 @@ export interface PlatformMessage {
     body?: string;
     batchId?: number;
     at?: string;
+}
+
+export interface LocationPoint {
+    lat: number;
+    lng: number;
+    /** ISO time the position was taken. */
+    at?: string;
+}
+
+export interface IncidentPayload {
+    type: string;
+    note: string;
+    order_id?: number;
+    /** `data:image/jpeg;base64,...` */
+    photo?: string;
 }

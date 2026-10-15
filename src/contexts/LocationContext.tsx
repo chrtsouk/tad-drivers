@@ -8,6 +8,7 @@ import { isEmpty } from '../utils';
 import { useAuth } from './AuthContext';
 import useStorage from '../hooks/use-storage';
 import useFleetbase from '../hooks/use-fleetbase';
+import { reportPosition } from '../platform/trail';
 
 const LocationContext = createContext({
     location: null,
@@ -115,6 +116,7 @@ export const LocationProvider = ({ children }) => {
         (location) => {
             console.log('[BackgroundGeolocation] onLocation:', location);
             setLocation(location);
+            if (location?.coords) reportPosition(location.coords.latitude, location.coords.longitude, location.timestamp);
         },
         [setLocation]
     );

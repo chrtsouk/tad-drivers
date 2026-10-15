@@ -20,6 +20,9 @@ Baseline = the commit `Import upstream fleetbase/navigator-app @ 37af1ee`. Regen
 | `src/components/ClockInCard.tsx` | Clock in/out control |
 | `src/components/PlatformNotificationBanner.tsx` | In-app banner for run notifications |
 | `src/components/PlatformDeliveryActions.tsx` | Delivered / Failed (reason picker, photo) |
+| `src/platform/trail.ts` | Sends GPS positions to the platform (saved route history): throttled, queued while offline |
+| `src/platform/incident.ts`, `src/components/ReportIncidentModal.tsx` | Incident report (type, note, optional photo, optional order) sent to the shop; opened from Account > Report an incident or from an order |
+| `src/components/PlatformOrderInfo.tsx` | On an order screen: the shop's custom fields (gate code, spice level…) and the incident button |
 | `src/screens/CollectOrdersScreen.tsx` | Collect orders (scan, manual entry, wrong-bag screen, Start run) |
 | `src/screens/ShiftScreen.tsx` | Dedicated clock screen |
 | `src/screens/PlatformSettingsScreen.tsx` | Account > TAD platform |

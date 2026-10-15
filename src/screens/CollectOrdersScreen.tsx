@@ -176,6 +176,11 @@ const CollectOrdersScreen = () => {
                                                 <Text color='$textSecondary' numberOfLines={1}>
                                                     {[o.name, o.postcode].filter(Boolean).join(' - ')}
                                                 </Text>
+                                                {(o.custom ?? []).map((c) => (
+                                                    <Text key={c.label} color='$textSecondary' numberOfLines={1}>
+                                                        {c.label}: {c.value}
+                                                    </Text>
+                                                ))}
                                             </YStack>
                                         </XStack>
                                     );

@@ -1,5 +1,5 @@
 import { PlatformError, ON_A_RUN_MESSAGE } from './errors';
-import type { DriverMe, DriverRun, PlatformMessage, ScanResult, Shift } from './types';
+import type { DriverMe, DriverRun, IncidentPayload, LocationPoint, PlatformMessage, ScanResult, Shift } from './types';
 
 export interface ResponseLike {
     ok: boolean;
@@ -100,6 +100,10 @@ export function createPlatformClient(options: PlatformClientOptions) {
         startRun: () => request<{ run: unknown }>('POST', '/driver/run/start', {}),
         delivered: (orderId: number) => request<{ order: unknown }>('POST', `/driver/orders/${encodeURIComponent(String(orderId))}/delivered`, {}),
         failed: (orderId: number, payload: { reason: string; photo?: string }) => request<{ order: unknown }>('POST', `/driver/orders/${encodeURIComponent(String(orderId))}/failed`, payload),
+        /** Saved GPS trail: one point, or a queue of points collected while offline (the platform keeps at most 200 per call). */
+        location: (points: LocationPoint[]) => request<{ ok: boolean; kept: number }>('POST', '/driver/location', { points }),
+        incidentTypes: async (): Promise<Record<string, string>> => (await request<{ types: Record<string, string> }>('GET', '/driver/incident-types')).types ?? {},
+        reportIncident: (payload: IncidentPayload) => request<{ incident: { id: number } }>('POST', '/driver/incidents', payload),
         notifications: async (): Promise<PlatformMessage[]> => (await request<{ messages: PlatformMessage[] }>('GET', '/driver/notifications')).messages ?? [],
         markRead: (ids: number[]) => request<{ ok: boolean }>('POST', '/driver/notifications/read', { ids }),
     };

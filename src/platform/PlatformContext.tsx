@@ -10,6 +10,7 @@ import { NotificationPoller, fallbackTitle } from './notifications';
 import { secureSettingsStore } from './secureStorage';
 import { PlatformSettings, SettingsInput, clearToken, isConfigured, loadSettings, saveSettings } from './settings';
 import { findPlatformOrder } from './deliveries';
+import { TrailReporter, bindTrailReporter } from './trail';
 import type { DriverMe, DriverRun, PlatformMessage } from './types';
 
 type Result = { ok: true } | { ok: false; message: string };
@@ -61,6 +62,13 @@ export function PlatformProvider({ children }: { children: React.ReactNode }) {
             }),
         []
     );
+
+    // GPS positions go to the platform (saved trail) while a token is linked
+    useEffect(() => {
+        const reporter = new TrailReporter(client);
+        bindTrailReporter(reporter);
+        return () => bindTrailReporter(null);
+    }, [client]);
 
     useEffect(() => {
         let active = true;
