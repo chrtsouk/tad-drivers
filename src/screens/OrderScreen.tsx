@@ -19,6 +19,8 @@ import { useAuth } from '../contexts/AuthContext';
 import { useLocation } from '../contexts/LocationContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useOrderManager } from '../contexts/OrderManagerContext';
+import { usePlatform } from '../platform/PlatformContext';
+import PlatformDeliveryActions from '../components/PlatformDeliveryActions';
 import { useTempStore } from '../contexts/TempStoreContext';
 import useSocketClusterClient from '../hooks/use-socket-cluster-client';
 import useStorage from '../hooks/use-storage';
@@ -69,6 +71,7 @@ const OrderScreen = ({ route }) => {
     const { listen } = useSocketClusterClient();
     const { runWithLoading, isLoading } = usePromiseWithLoading();
     const { updateStorageOrder, setDimissedOrders } = useOrderManager();
+    const { deliverFleetbaseOrder } = usePlatform();
     const { store, removeValue } = useTempStore();
     const [order, setOrder] = useState(new Order(params.order, adapter));
     const [activityLoading, setActivityLoading] = useState();
@@ -332,6 +335,12 @@ const OrderScreen = ({ route }) => {
                 setLoadingOverlayMessage(null);
                 toast.success(`Order status updated to: ${activity._resolved_status ?? activity.status}`);
 
+                // Proof of delivery and the activity went through Fleetbase: now tell the TAD platform the drop is done,
+                // so its state machine, the customer message and the batcher stay correct.
+                if (updatedOrder.getAttribute('status') === 'completed') {
+                    deliverFleetbaseOrder(updatedOrder.id);
+                }
+
                 const currentDestination = getOrderDestination(updatedOrder, adapter);
                 const shouldNotifyUserDestinationChanged = activity.complete && updatedOrder.status !== 'completed' && previousDestination?.id !== currentDestination?.id;
                 if (shouldNotifyUserDestinationChanged) {
@@ -348,7 +357,7 @@ const OrderScreen = ({ route }) => {
                 activitySheetRef.current?.closeBottomSheet();
             }
         },
-        [order]
+        [order, deliverFleetbaseOrder]
     );
 
     const completeOrder = useCallback(
@@ -576,6 +585,7 @@ const OrderScreen = ({ route }) => {
                             </Button>
                         )}
                     </XStack>
+                    <PlatformDeliveryActions order={order} />
                     {!isIncomingAdhoc && (
                         <YStack>
                             <CurrentDestinationSelect

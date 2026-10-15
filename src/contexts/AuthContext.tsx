@@ -7,6 +7,7 @@ import useStorage, { storage } from '../hooks/use-storage';
 import useFleetbase from '../hooks/use-fleetbase';
 import { useLanguage } from './LanguageContext';
 import { useNotification } from './NotificationContext';
+import { usePlatform } from '../platform/PlatformContext';
 import { LoginManager as FacebookLoginManager } from 'react-native-fbsdk-next';
 
 const AuthContext = createContext();
@@ -36,6 +37,7 @@ export const AuthProvider = ({ children }) => {
     const { fleetbase, adapter } = useFleetbase();
     const { setLocale } = useLanguage();
     const { deviceToken } = useNotification();
+    const { disconnect: disconnectPlatform } = usePlatform();
     const [storedDriver, setStoredDriver] = useStorage('driver');
     const [organizations, setOrganizations] = useStorage('organizations', []);
     const [authToken, setAuthToken] = useStorage('_driver_token');
@@ -355,13 +357,16 @@ export const AuthProvider = ({ children }) => {
         // Clear storage/ cache
         clearSessionData();
 
+        // The TAD platform driver token belongs to this driver: remove it from the phone too
+        disconnectPlatform().catch((err) => console.warn('Could not clear the TAD platform token:', err));
+
         // Reset locale
         setLocale(navigatorConfig('defaultLocale', 'en'));
 
         later(() => {
             dispatch({ type: 'LOGOUT', isSigningOut: false });
         });
-    }, [setDriver]);
+    }, [setDriver, disconnectPlatform]);
 
     // // Sync device token if it changes
     // // Test on IOS before adding

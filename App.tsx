@@ -16,6 +16,7 @@ import { NotificationProvider } from './src/contexts/NotificationContext';
 import { ChatProvider } from './src/contexts/ChatContext';
 import { LocationProvider } from './src/contexts/LocationContext';
 import { ConfigProvider } from './src/contexts/ConfigContext';
+import { PlatformProvider } from './src/platform/PlatformContext';
 import config from './tamagui.config';
 
 function AppContent(): React.JSX.Element {
@@ -29,6 +30,7 @@ function AppContent(): React.JSX.Element {
                         <BottomSheetModalProvider>
                             <ConfigProvider>
                                 <NotificationProvider>
+                                    <PlatformProvider>
                                     <LanguageProvider>
                                         <AuthProvider>
                                             <SocketClusterProvider>
@@ -48,6 +50,7 @@ function AppContent(): React.JSX.Element {
                                             </SocketClusterProvider>
                                         </AuthProvider>
                                     </LanguageProvider>
+                                    </PlatformProvider>
                                 </NotificationProvider>
                             </ConfigProvider>
                         </BottomSheetModalProvider>

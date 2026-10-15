@@ -22,6 +22,7 @@ jest.mock('../src/contexts/NotificationContext', () => ({ NotificationProvider: 
 jest.mock('../src/contexts/ChatContext', () => ({ ChatProvider: mockProvider }));
 jest.mock('../src/contexts/LocationContext', () => ({ LocationProvider: mockProvider }));
 jest.mock('../src/contexts/ConfigContext', () => ({ ConfigProvider: mockProvider }));
+jest.mock('../src/platform/PlatformContext', () => ({ PlatformProvider: mockProvider }));
 jest.mock('../src/contexts/ThemeContext', () => ({
     ThemeProvider: mockProvider,
     useThemeContext: () => ({ appTheme: 'light' }),

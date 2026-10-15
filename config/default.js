@@ -4,7 +4,7 @@ import { toArray } from '../src/utils';
 export const DefaultConfig = {
     theme: config('APP_THEME', 'blue'),
     driverNavigator: {
-        tabs: toArray(config('DRIVER_NAVIGATOR_TABS', 'DriverDashboardTab,DriverTaskTab,DriverReportTab,DriverChatTab,DriverAccountTab')),
+        tabs: toArray(config('DRIVER_NAVIGATOR_TABS', 'DriverDashboardTab,DriverCollectTab,DriverTaskTab,DriverReportTab,DriverChatTab,DriverAccountTab')),
         defaultTab: toArray(config('DRIVER_NAVIGATOR_DEFAULT_TAB', 'DriverDashboardTab')),
     },
     defaultLocale: config('DEFAULT_LOCALE', 'en'),

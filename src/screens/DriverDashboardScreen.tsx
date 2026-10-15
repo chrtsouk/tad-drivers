@@ -1,10 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
-import { Text, YStack, XStack, useTheme } from 'tamagui';
+import { ScrollView } from 'react-native';
+import { Button, Text, YStack, XStack, useTheme } from 'tamagui';
 import { useLocation } from '../contexts/LocationContext';
 import { useOrderManager } from '../contexts/OrderManagerContext';
 import { humanize } from 'inflected';
 import { get } from '../utils';
 import OdometerNumber from '../components/OdometerNumber';
+import ClockInCard from '../components/ClockInCard';
+import { usePlatform } from '../platform/PlatformContext';
 import useAppTheme from '../hooks/use-app-theme';
 
 const WidgetContainer = ({ px = '$4', py = '$4', children, ...props }) => {
@@ -21,10 +24,24 @@ const DriverDashboardScreen = () => {
     const navigation = useNavigation();
     const { isTracking, location } = useLocation();
     const { allActiveOrders } = useOrderManager();
+    const { configured, run } = usePlatform();
+    const waiting = run?.batch?.status === 'assigned' ? run.orders.filter((o) => !o.picked_at).length : 0;
 
     return (
         <YStack flex={1} bg='$background'>
+            <ScrollView showsVerticalScrollIndicator={false}>
             <YStack flex={1} padding='$4' gap='$4'>
+                <ClockInCard />
+                {configured ? (
+                    <XStack gap='$3'>
+                        <Button flex={1} onPress={() => navigation.navigate('DriverCollectTab')} bg={waiting ? '$info' : '$surface'} borderWidth={1} borderColor={waiting ? '$infoBorder' : '$borderColorWithShadow'}>
+                            <Button.Text color={waiting ? '$infoText' : '$textPrimary'}>{waiting ? `Collect orders (${waiting})` : 'Collect orders'}</Button.Text>
+                        </Button>
+                        <Button flex={1} onPress={() => navigation.navigate('Shift')} bg='$surface' borderWidth={1} borderColor='$borderColorWithShadow'>
+                            <Button.Text color='$textPrimary'>Shift details</Button.Text>
+                        </Button>
+                    </XStack>
+                ) : null}
                 <YStack space='$4'>
                     <WidgetContainer>
                         <XStack>
@@ -77,6 +94,7 @@ const DriverDashboardScreen = () => {
                     </WidgetContainer>
                 </XStack>
             </YStack>
+            </ScrollView>
         </YStack>
     );
 };

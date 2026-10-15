@@ -16,6 +16,7 @@ import {
     faTriangleExclamation,
     faFlag,
     faTimes,
+    faQrcode,
 } from '@fortawesome/free-solid-svg-icons';
 import { useTheme, Text, View, XStack, Image } from 'tamagui';
 import { navigatorConfig, get, config, toArray, getTheme } from '../utils';
@@ -42,6 +43,10 @@ import ChatParticipantsScreen from '../screens/ChatParticipantsScreen';
 import CreateChatChannelScreen from '../screens/CreateChatChannelScreen';
 import DriverProfileScreen from '../screens/DriverProfileScreen';
 import DriverAccountScreen from '../screens/DriverAccountScreen';
+import CollectOrdersScreen from '../screens/CollectOrdersScreen';
+import ShiftScreen from '../screens/ShiftScreen';
+import PlatformSettingsScreen from '../screens/PlatformSettingsScreen';
+import { usePlatform } from '../platform/PlatformContext';
 import { useOrderManager } from '../contexts/OrderManagerContext';
 import { useChat } from '../contexts/ChatContext';
 import useAppTheme from '../hooks/use-app-theme';
@@ -64,6 +69,7 @@ const importedIconsMap = {
     faUser,
     faTriangleExclamation,
     faFlag,
+    faQrcode,
 };
 
 function getTabConfig(name, key, defaultValue = null) {
@@ -77,12 +83,28 @@ function getTabConfig(name, key, defaultValue = null) {
 }
 
 function createTabScreens() {
-    const tabs = toArray(navigatorConfig('driverNavigator.tabs', 'DriverDashboardTab,DriverTaskTab,DriverReportTab,DriverChatTab,DriverAccountTab'));
+    const tabs = toArray(navigatorConfig('driverNavigator.tabs', 'DriverDashboardTab,DriverCollectTab,DriverTaskTab,DriverReportTab,DriverChatTab,DriverAccountTab'));
     const screens = {
         DriverDashboardTab: {
             screen: DriverDashboardTab,
             options: {
-                tabBarLabel: config('DRIVER_DASHBOARD_TAB_LABEL', 'Dash'),
+                tabBarLabel: config('DRIVER_DASHBOARD_TAB_LABEL', 'Home'),
+            },
+        },
+        DriverCollectTab: {
+            screen: DriverCollectTab,
+            options: () => {
+                const { run } = usePlatform();
+                const waiting = run?.batch?.status === 'assigned' ? run.orders.filter((o) => !o.picked_at).length : 0;
+
+                return {
+                    tabBarLabel: config('DRIVER_COLLECT_TAB_LABEL', 'Collect'),
+                    tabBarBadge: waiting,
+                    tabBarBadgeStyle: {
+                        marginRight: -5,
+                        opacity: waiting ? 1 : 0.5,
+                    },
+                };
             },
         },
         DriverTaskTab: {
@@ -156,6 +178,9 @@ function getDefaultTabIcon(routeName) {
         case 'DriverDashboardTab':
             icon = faGaugeHigh;
             break;
+        case 'DriverCollectTab':
+            icon = faQrcode;
+            break;
         case 'DriverTaskTab':
             icon = faClipboardList;
             break;
@@ -200,6 +225,33 @@ const DriverDashboardTab = createNativeStackNavigator({
     screens: {
         DriverDashboard: {
             screen: DriverDashboardScreen,
+            options: ({ route, navigation }) => {
+                return {
+                    headerShown: false,
+                };
+            },
+        },
+        Shift: {
+            screen: ShiftScreen,
+            options: ({ route, navigation }) => {
+                return {
+                    title: '',
+                    headerTransparent: true,
+                    headerShadowVisible: false,
+                    headerLeft: () => {
+                        return <BackButton onPress={() => navigation.goBack()} />;
+                    },
+                };
+            },
+        },
+    },
+});
+
+const DriverCollectTab = createNativeStackNavigator({
+    initialRouteName: 'CollectOrders',
+    screens: {
+        CollectOrders: {
+            screen: CollectOrdersScreen,
             options: ({ route, navigation }) => {
                 return {
                     headerShown: false,
@@ -477,6 +529,19 @@ const DriverAccountTab = createNativeStackNavigator({
             options: ({ route, navigation }) => {
                 return {
                     headerShown: false,
+                };
+            },
+        },
+        PlatformSettings: {
+            screen: PlatformSettingsScreen,
+            options: ({ route, navigation }) => {
+                return {
+                    title: '',
+                    headerTransparent: true,
+                    headerShadowVisible: false,
+                    headerLeft: () => {
+                        return <BackButton onPress={() => navigation.goBack()} />;
+                    },
                 };
             },
         },

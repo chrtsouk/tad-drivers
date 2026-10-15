@@ -6,6 +6,7 @@ import { useNotification } from '../contexts/NotificationContext';
 import { useChat } from '../contexts/ChatContext';
 import { useOrderManager } from '../contexts/OrderManagerContext';
 import useFleetbase from '../hooks/use-fleetbase';
+import PlatformNotificationBanner from '../components/PlatformNotificationBanner';
 
 const getCurrentScreen = (tabNavigation) => {
     const tabState = tabNavigation.getState?.();
@@ -38,6 +39,10 @@ const DriverLayout = ({ children, state, descriptors, navigation: tabNavigation 
             const { payload } = notification;
             const id = payload.id;
             const type = payload.type;
+
+            if (type === 'tad_platform' && action === 'opened') {
+                tabNavigation.navigate('DriverCollectTab');
+            }
 
             if (type === 'chat_message_received' && action === 'opened') {
                 try {
@@ -106,7 +111,12 @@ const DriverLayout = ({ children, state, descriptors, navigation: tabNavigation 
         };
     }, [addNotificationListener, removeNotificationListener, fleetbase, tabNavigation, navigation]);
 
-    return <View style={{ width: '100%', height: '100%', flex: 1 }}>{children}</View>;
+    return (
+        <View style={{ width: '100%', height: '100%', flex: 1 }}>
+            {children}
+            <PlatformNotificationBanner onOpen={() => tabNavigation.navigate('DriverCollectTab')} />
+        </View>
+    );
 };
 
 export default DriverLayout;

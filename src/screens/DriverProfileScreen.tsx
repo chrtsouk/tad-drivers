@@ -8,6 +8,7 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { abbreviateName, navigatorConfig, showActionSheet } from '../utils';
 import { useAuth } from '../contexts/AuthContext';
 import { useLanguage } from '../contexts/LanguageContext';
+import { usePlatform } from '../platform/PlatformContext';
 import storage from '../utils/storage';
 
 const DriverProfileScreen = () => {
@@ -15,6 +16,7 @@ const DriverProfileScreen = () => {
     const navigation = useNavigation();
     const { t } = useLanguage();
     const { driver, logout, switchOrganization, organizations } = useAuth();
+    const { configured, tokenRefused } = usePlatform();
 
     const handlePressMenuItem = useCallback(
         (item) => {
@@ -56,6 +58,16 @@ const DriverProfileScreen = () => {
         const items = [
             { id: '1', title: 'Account', screen: 'DriverAccount' },
             {
+                id: '3',
+                title: 'TAD platform',
+                screen: 'PlatformSettings',
+                rightComponent: (
+                    <Text color={configured && !tokenRefused ? '$successBorder' : '$warningText'} fontSize={13} numberOfLines={1}>
+                        {tokenRefused ? 'Token refused' : configured ? 'Linked' : 'Not linked'}
+                    </Text>
+                ),
+            },
+            {
                 id: '2',
                 title: 'Organization',
                 handler: () => handleSelectOrganization(),
@@ -68,7 +80,7 @@ const DriverProfileScreen = () => {
         ];
 
         return items.filter((item) => !item.hidden);
-    }, [driver]);
+    }, [driver, configured, tokenRefused]);
 
     const renderMenuItem = ({ item }) => (
         <Pressable
