@@ -7,7 +7,6 @@ import { SimpleGrid } from 'react-native-super-grid';
 import FastImage from 'react-native-fast-image';
 import { WaypointCircle } from './OrderWaypointList';
 import OrderCustomerCard from './OrderCustomerCard';
-import { formatCurrency } from '../utils/format';
 
 const ENTITY_COLUMN_WIDTH = 100;
 const OrderPayloadEntities = ({ order, onPress }) => {
@@ -64,9 +63,6 @@ const OrderPayloadEntities = ({ order, onPress }) => {
                         </Text>
                         <Text textAlign='center' color='$textSecondary' numberOfLines={1}>
                             {entity.tracking_number.tracking_number}
-                        </Text>
-                        <Text textAlign='center' color='$textSecondary' numberOfLines={1}>
-                            {formatCurrency(entity.price, entity.currency)}
                         </Text>
                     </YStack>
                 </YStack>

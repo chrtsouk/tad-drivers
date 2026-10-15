@@ -165,9 +165,9 @@ export const LocationProvider = ({ children }) => {
         BackgroundGeolocation.ready(
             {
                 backgroundPermissionRationale: {
-                    title: 'Allow Fleetbase Navigator to access your location',
+                    title: 'Allow TAD Drivers to access your location',
                     message:
-                        'Fleetbase Navigator collects precise location data to enable real-time driver tracking and order progress updates for your organization’s dispatchers and operations team, even when the app is closed or not in use. Location is collected while you are online and is sent securely to Fleetbase.',
+                        'TAD Drivers collects precise location data so the Texas After Dark shop can track delivery progress and show customers where their order is, even when the app is closed or not in use. Location is collected only while you are clocked in and online.',
                     positiveAction: 'Allow',
                     negativeAction: 'Deny',
                 },

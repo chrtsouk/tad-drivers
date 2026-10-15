@@ -9,9 +9,10 @@ import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { requestWebGeolocationPermission } from '../utils/location';
 import { useLanguage } from '../contexts/LanguageContext';
 import useDimensions from '../hooks/use-dimensions';
+import { PRIVACY_POLICY_URL } from '../platform/brand';
 
 const LocationPermissionScreen: React.FC = () => {
-    const privacyPolicyUrl = 'https://www.fleetbase.io/privacy-policy';
+    const privacyPolicyUrl = PRIVACY_POLICY_URL;
     const navigation = useNavigation();
     const insets = useSafeAreaInsets();
     const { screenWidth } = useDimensions();

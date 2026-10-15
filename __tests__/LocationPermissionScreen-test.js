@@ -41,7 +41,7 @@ jest.mock('../src/contexts/LanguageContext', () => ({
             ({
                 'LocationPermissionScreen.enableLocationServices': 'Location Data Disclosure',
                 'LocationPermissionScreen.enableLocationPrompt':
-                    'Fleetbase Navigator collects precise location data to enable real-time driver tracking and order progress updates for your organization’s dispatchers and operations team, even when the app is closed or not in use. Location is collected while you are online and is sent securely to Fleetbase.',
+                    'TAD Drivers collects precise location data so the Texas After Dark shop can track delivery progress and show customers where their order is, even when the app is closed or not in use. Location is collected only while you are clocked in and online.',
                 'LocationPermissionScreen.shareAndContinue': 'Allow location and continue',
                 'LocationPermissionScreen.privacyPolicy': 'Privacy Policy',
                 'LocationPermissionScreen.permissionNeededTitle': 'Location Permission Needed',
@@ -136,6 +136,6 @@ describe('LocationPermissionScreen', () => {
             await privacyButton.props.onPress();
         });
 
-        expect(Linking.openURL).toHaveBeenCalledWith('https://www.fleetbase.io/privacy-policy');
+        expect(Linking.openURL).toHaveBeenCalledWith('https://texasafterdark.co.uk/privacy');
     });
 });

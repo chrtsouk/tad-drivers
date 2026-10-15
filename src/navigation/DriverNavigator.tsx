@@ -180,7 +180,7 @@ function getDriverNavigatorHeaderOptions({ route, navigation }) {
         headerTitle: '',
         headerLeft: (props) => (
             <Text color='$textPrimary' fontSize={20} fontWeight='bold'>
-                Navigator
+                TAD Drivers
             </Text>
         ),
         headerRight: (props) => <DriverOnlineToggle {...props} />,
@@ -509,12 +509,12 @@ const DriverNavigator = createBottomTabNavigator({
             headerLeft: (props) => (
                 <View pl='$3'>
                     <XStack alignItems='center'>
-                        <Image source={require('../../assets/navigator-icon-transparent.png')} style={{ width: 18, height: 18, marginRight: 5 }} />
+                        <Image source={require('../../assets/tad-logo-small.png')} style={{ width: 26, height: 24, marginRight: 6 }} />
                         <Text color='$textPrimary' fontSize={20} fontWeight='bold'>
-                            Navigator
+                            TAD Drivers
                         </Text>
                     </XStack>
-                    <Text color='$textSecondary' fontSize={8} ml={25}>
+                    <Text color='$textSecondary' fontSize={8} ml={32}>
                         v{DeviceInfo.getVersion()} #{DeviceInfo.getBuildNumber()}
                     </Text>
                 </View>

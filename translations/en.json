@@ -76,7 +76,7 @@
     "DriverReportScreen": {},
     "LocationPermissionScreen": {
         "enableLocationServices": "Location Data Disclosure",
-        "enableLocationPrompt": "Fleetbase Navigator collects precise location data to enable real-time driver tracking and order progress updates for your organization’s dispatchers and operations team, even when the app is closed or not in use. Location is collected while you are online and is sent securely to Fleetbase.",
+        "enableLocationPrompt": "TAD Drivers collects precise location data so the Texas After Dark shop can track delivery progress and show customers where their order is, even when the app is closed or not in use. Location is collected only while you are clocked in and online.",
         "shareAndContinue": "Allow location and continue",
         "privacyPolicy": "Privacy Policy",
         "permissionNeededTitle": "Location Permission Needed",

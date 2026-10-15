@@ -17,6 +17,7 @@
         "pod:deintegrate": "cd ios && PATH=/opt/homebrew/bin:$HOME/.rbenv/shims:$PATH RCT_NEW_ARCH_ENABLED=1 bundle exec pod deintegrate && yarn run pod:install",
         "reset": "rm -rf node_modules/ yarn.lock && yarn install && yarn run pod:reset",
         "test": "jest",
+        "typecheck": "tsc -p tsconfig.platform.json",
         "lint": "eslint .",
         "format": "prettier --write .",
         "tamagui:build": "./node_modules/.bin/tamagui-build",
@@ -160,7 +161,7 @@
         ],
         "modulePathIgnorePatterns": [
             "<rootDir>/.claude/worktrees/",
-            "<rootDir>/legacy/"
+            "<rootDir>/.tmp-test/"
         ]
     }
 }
