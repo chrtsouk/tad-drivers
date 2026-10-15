@@ -41,7 +41,7 @@ jest.mock('../src/contexts/LanguageContext', () => ({
             ({
                 'LocationPermissionScreen.enableLocationServices': 'Location Data Disclosure',
                 'LocationPermissionScreen.enableLocationPrompt':
-                    'TAD Drivers collects precise location data so the Texas After Dark shop can track delivery progress and show customers where their order is, even when the app is closed or not in use. Location is collected only while you are clocked in and online.',
+                    'TAD Drivers collects precise location data so the Texas After Dark dispatchers and operations team can track delivery progress and show customers where their order is, even when the app is closed or not in use. Location is collected only while you are clocked in and online.',
                 'LocationPermissionScreen.shareAndContinue': 'Allow location and continue',
                 'LocationPermissionScreen.privacyPolicy': 'Privacy Policy',
                 'LocationPermissionScreen.permissionNeededTitle': 'Location Permission Needed',

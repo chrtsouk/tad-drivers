@@ -167,7 +167,7 @@ export const LocationProvider = ({ children }) => {
                 backgroundPermissionRationale: {
                     title: 'Allow TAD Drivers to access your location',
                     message:
-                        'TAD Drivers collects precise location data so the Texas After Dark shop can track delivery progress and show customers where their order is, even when the app is closed or not in use. Location is collected only while you are clocked in and online.',
+                        'TAD Drivers collects precise location data so the Texas After Dark dispatchers and operations team can track delivery progress and show customers where their order is, even when the app is closed or not in use. Location is collected only while you are clocked in and online.',
                     positiveAction: 'Allow',
                     negativeAction: 'Deny',
                 },
