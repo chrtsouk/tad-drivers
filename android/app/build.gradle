@@ -101,17 +101,17 @@ android {
     
     namespace "io.fleetbase.navigator"
     defaultConfig {
-        applicationId project.env.get("APP_IDENTIFIER")
+        applicationId project.env.get("APP_IDENTIFIER") ?: "uk.co.texasafterdark.drivers"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode project.env.get("ANDROID_VERSION_CODE")?.toInteger() ?: 1
         versionName project.env.get("ANDROID_VERSION_NAME") ?: "1.0.0"
         missingDimensionStrategy 'react-native-camera', 'general' 
         manifestPlaceholders = [
-            appLinkScheme: project.env.get("APP_LINK_PREFIX") ?: "flbnavigator"
+            appLinkScheme: project.env.get("APP_LINK_PREFIX") ?: "tadrivers"
         ]
         resValue "string", "build_config_package", "io.fleetbase.navigator"
-        resValue "string", "app_name", project.env.get("APP_NAME") ?: "Navigator"
+        resValue "string", "app_name", project.env.get("APP_NAME") ?: "TAD Drivers"
         resValue "string", "TRANSISTORSOFT_LICENSE_KEY_ANDROID", project.env.get("TRANSISTORSOFT_LICENSE_KEY_ANDROID") ?: project.env.get("TRANSISTORSOFT_LICENSE_KEY") ?: ""
     }
     signingConfigs {
