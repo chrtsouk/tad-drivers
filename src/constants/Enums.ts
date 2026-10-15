@@ -35,27 +35,6 @@ export const IssueStatus = Object.freeze({
     CANCELED: 'Canceled',
 });
 
-export const FuelReportStatus = Object.freeze({
-    DRAFT: 'Draft',
-    PENDING_APPROVAL: 'Pending Approval',
-    APPROVED: 'Approved',
-    REJECTED: 'Rejected',
-    REVISED: 'Revised',
-    SUBMITTED: 'Submitted',
-    IN_REVIEW: 'In Review',
-    CONFIRMED: 'Confirmed',
-    ARCHIVED: 'Archived',
-    CANCELED: 'Canceled',
-});
-
-export const DriverFuelReportStatus = Object.freeze({
-    DRAFT: 'Draft',
-    REVISED: 'Revised',
-    SUBMITTED: 'Submitted',
-    ARCHIVED: 'Archived',
-    CANCELED: 'Canceled',
-});
-
 function convertEnumToArray(enumObj) {
     return Object.entries(enumObj).map(([key, value]) => ({ key, value }));
 }
@@ -70,12 +49,4 @@ export function getIssuePriorities() {
 
 export function getIssueStatuses() {
     return convertEnumToArray(IssueStatus);
-}
-
-export function getFuelReportStatuses() {
-    return convertEnumToArray(FuelReportStatus);
-}
-
-export function getDriverFuelReportStatuses() {
-    return convertEnumToArray(DriverFuelReportStatus);
 }

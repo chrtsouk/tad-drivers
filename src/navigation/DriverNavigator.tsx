@@ -34,9 +34,6 @@ import DriverReportScreen from '../screens/DriverReportScreen';
 import CreateIssueScreen from '../screens/CreateIssueScreen';
 import EditIssueScreen from '../screens/EditIssueScreen';
 import IssueScreen from '../screens/IssueScreen';
-import CreateFuelReportScreen from '../screens/CreateFuelReportScreen';
-import EditFuelReportScreen from '../screens/EditFuelReportScreen';
-import FuelReportScreen from '../screens/FuelReportScreen';
 import ChatHomeScreen from '../screens/ChatHomeScreen';
 import ChatChannelScreen from '../screens/ChatChannelScreen';
 import ChatParticipantsScreen from '../screens/ChatParticipantsScreen';
@@ -126,7 +123,7 @@ function createTabScreens() {
             screen: DriverReportTab,
             options: () => {
                 return {
-                    tabBarLabel: config('DRIVER_REPORT_TAB_LABEL', 'Reports'),
+                    tabBarLabel: config('DRIVER_REPORT_TAB_LABEL', 'Issues'),
                 };
             },
         },
@@ -347,70 +344,6 @@ const DriverReportTab = createNativeStackNavigator({
             options: ({ route, navigation }) => {
                 return {
                     headerShown: false,
-                };
-            },
-        },
-        CreateFuelReport: {
-            screen: CreateFuelReportScreen,
-            options: ({ route, navigation }) => {
-                return {
-                    presentation: 'modal',
-                    headerTitle: '',
-                    headerLeft: (props) => (
-                        <Text color='$textPrimary' fontSize={20} fontWeight='bold'>
-                            Create a new Fuel Report
-                        </Text>
-                    ),
-                    headerRight: (props) => <HeaderButton icon={faTimes} onPress={() => navigation.goBack()} />,
-                    headerStyle: {
-                        backgroundColor: getTheme('background'),
-                        headerTintColor: getTheme('borderColor'),
-                    },
-                };
-            },
-        },
-        EditFuelReport: {
-            screen: EditFuelReportScreen,
-            options: ({ route, navigation }) => {
-                const params = route.params || {};
-                const fuelReport = params.fuelReport;
-
-                return {
-                    presentation: 'modal',
-                    headerTitle: '',
-                    headerLeft: (props) => (
-                        <Text color='$textPrimary' fontSize={18} fontWeight='bold' numberOfLines={1}>
-                            Edit Fuel Report from {format(new Date(fuelReport.created_at), 'MMM dd, yyyy HH:mm')}
-                        </Text>
-                    ),
-                    headerRight: (props) => <HeaderButton icon={faTimes} onPress={() => navigation.goBack()} />,
-                    headerStyle: {
-                        backgroundColor: getTheme('background'),
-                        headerTintColor: getTheme('borderColor'),
-                    },
-                };
-            },
-        },
-        FuelReport: {
-            screen: FuelReportScreen,
-            options: ({ route, navigation }) => {
-                const {
-                    store: { fuelReport },
-                } = useTempStore();
-
-                return {
-                    presentation: 'modal',
-                    headerTitle: '',
-                    headerLeft: (props) => (
-                        <Text color='$textPrimary' fontSize={18} fontWeight='bold' numberOfLines={1}>
-                            {format(new Date(fuelReport.created_at), 'MMM dd, yyyy HH:mm')}
-                        </Text>
-                    ),
-                    headerRight: (props) => <PortalHost name='FuelReportScreenHeaderRightPortal' />,
-                    headerStyle: {
-                        backgroundColor: getTheme('background'),
-                        headerTintColor: getTheme('borderColor'),
-                    },
                 };
             },
         },
