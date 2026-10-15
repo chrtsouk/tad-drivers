@@ -1,3 +1,5 @@
+> **Update 15 Oct 2026:** TAD Drivers now exists as a fork of Fleetbase Navigator (see the repo README). Where this plan mentions cash/earnings for the driver app, that is obsolete: the shop takes online payment only and drivers are paid outside the platform.
+
 # TAD Delivery System — plan + open-source projects to build on (saved 14 Oct 2026)
 
 SEPARATE from the management app. Two apps, both connect to the management app (the hub) via its API:
