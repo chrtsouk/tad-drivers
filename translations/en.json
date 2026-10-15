@@ -1,0 +1,88 @@
+{
+    "common": {
+        "fleetbase": "Fleetbase",
+        "navigator": "Navigator",
+        "apiKey": "API Key",
+        "cancel": "Cancel",
+        "new": "New",
+        "create": "Create",
+        "save": "Save",
+        "delete": "Delete",
+        "edit": "Edit",
+        "update": "Update",
+        "service": "Service",
+        "retry": "Retry",
+        "loading": "Loading...",
+        "confirm": "Confirm",
+        "confirmation": "Confirmation",
+        "ok": "OK",
+        "done": "Done",
+        "tryAgain": "Try Again"
+    },
+    "orderStatuses": {
+        "created": "Created",
+        "preparing": "Preparing",
+        "dispatched": "Dispatched",
+        "driver_enroute": "Driver en-route",
+        "pending": "Pending",
+        "in_progress": "In progress",
+        "completed": "Completed"
+    },
+    "BootScreen": {
+        "missingRequiredConfigurationKeys": "Missing required configuration keys"
+    },
+    "AccountScreen": {
+        "changeProfilePhotoOptions": {
+            "takePhoto": "Take Photo",
+            "photoLibrary": "Photo Library",
+            "deleteProfilePhoto": "Delete Profile Photo"
+        },
+        "profilePhoto": "Profile Photo",
+        "email": "Email",
+        "phoneNumber": "Phone Number",
+        "name": "Name",
+        "language": "Language",
+        "theme": "Theme",
+        "deleteAccount": "Delete Account",
+        "termsOfService": "Terms of Service",
+        "privacyPolicy": "Privacy Policy",
+        "tracking": "Tracking",
+        "account": "Account",
+        "dataProtection": "Data Protection",
+        "clearCache": "Clear Cache",
+        "signOut": "Sign Out",
+        "signedOut": "Signed Out.",
+        "cacheCleared": "Cache Cleared.",
+        "schemeChanged": "Now using {{selectedScheme}} mode.",
+        "languageChanged": "Now using {{selectedLanguage}}.",
+        "photoChanged": "Profile photo changed.",
+        "photoRemoved": "Profile photo removed."
+    },
+    "ProfileScreen": {
+        "organizationChanged": "Switched to {{selectedOrganization}} organization."
+    },
+    "AddNewLocationScreen": {
+        "addNewAddress": "Add new address",
+        "streetName": "Street name and number",
+        "weThinkYoureAroundHere": "We think you're around here",
+        "cantFindYourAddress": "Can't find your address?",
+        "useMapInstead": "Use a map to do this instead"
+    },
+    "SetupWarningScreen": {
+        "configurationMissing": "Configurations Missing!",
+        "unconfiguredApp": "Looks like you haven't properly configured your app.",
+        "envMissing": "is missing from environment!"
+    },
+    "DriverReportScreen": {},
+    "LocationPermissionScreen": {
+        "enableLocationServices": "Location Data Disclosure",
+        "enableLocationPrompt": "Fleetbase Navigator collects precise location data to enable real-time driver tracking and order progress updates for your organization’s dispatchers and operations team, even when the app is closed or not in use. Location is collected while you are online and is sent securely to Fleetbase.",
+        "shareAndContinue": "Allow location and continue",
+        "privacyPolicy": "Privacy Policy",
+        "permissionNeededTitle": "Location Permission Needed",
+        "enableInSettingsTitle": "Enable Location in Settings",
+        "permissionDeniedPrompt": "Location access is required before you can sign in. Would you like to allow access now?",
+        "locationBlockedPrompt": "Location access has been blocked. Please open Settings and enable it to continue.",
+        "goToSettings": "Go to Settings"
+    }
+}

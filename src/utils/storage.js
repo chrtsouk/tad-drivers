@@ -1,0 +1,17 @@
+export {
+    clear,
+    get,
+    getArray,
+    getBool,
+    getInt,
+    getMap,
+    getString,
+    remove,
+    set,
+    setArray,
+    setBool,
+    setInt,
+    setMap,
+    setString,
+    storage as default,
+} from '../hooks/use-storage';
